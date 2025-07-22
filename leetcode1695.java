@@ -1,28 +1,17 @@
 import java.util.*;
-public class leetcode1695{
-
+public class leetcode1695 {
     public static int maximumUniqueSubarray(int[] nums) {
-        int left = 0;
-        int maxSum = 0;
-        int currentSum = 0;
+        Set<Integer> set = new HashSet<>();
+        int left = 0, currentSum = 0, maxSum = 0;
 
         for (int right = 0; right < nums.length; right++) {
-            // Check for duplicate in current window [left, right)
-            for (int i = left; i < right; i++) {
-                if (nums[i] == nums[right]) {
-                    // Remove all elements up to and including the duplicate
-                    while (nums[left] != nums[right]) {
-                        currentSum -= nums[left];
-                        left++;
-                    }
-                    // Remove the duplicate itself
-                    currentSum -= nums[left];
-                    left++;
-                    break;
-                }
+            while (set.contains(nums[right])) {
+                set.remove(nums[left]);
+                currentSum -= nums[left];
+                left++;
             }
 
-            // Add the current element to the currentSum
+            set.add(nums[right]);
             currentSum += nums[right];
             maxSum = Math.max(maxSum, currentSum);
         }
