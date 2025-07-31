@@ -13,7 +13,7 @@ public class leetcode1695 {
 
             set.add(nums[right]);
             currentSum += nums[right];
-            maxSum = Math.max(maxSum, currentSum);;;;;;;;
+            maxSum = Math.max(maxSum, currentSum);;;;;;;
         }
 
         return maxSum;
